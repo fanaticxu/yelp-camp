@@ -1,0 +1,30 @@
+{
+  "name": "yelp-camp",
+  "version": "1.0.0",
+  "description": "yelp-camp practice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fanaticxu/yelp-camp.git"
+  },
+  "author": "Frank",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "ejs": "^2.5.7",
+    "express": "^4.15.3",
+    "express-session": "^1.15.5",
+    "mongoose": "^4.11.5",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.1.0"
+  },
+  "bugs": {
+    "url": "https://github.com/fanaticxu/yelp-camp/issues"
+  },
+  "homepage": "https://github.com/fanaticxu/yelp-camp#readme",
+  "devDependencies": {}
+}
