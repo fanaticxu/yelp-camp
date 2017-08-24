@@ -61,16 +61,27 @@ router.get("/:id", function(req, res){
 
 //EDIT CAMPGROUND
 router.get("/:id/edit", function(req, res){
-    Campground.findById(req.params.id, function(err, campground){
-       if(err) {
-        console.log(err);
-        res.redirect("/campgrounds/" + req.params.id);
-       } else {
-        res.render("campgrounds/edit", {campground: campground});
-       }     
+    if(req.isAuthenticated()){
+        Campground.findById(req.params.id, function(err, campground){
+           if(err) {
+            console.log(err);
+            res.redirect("/campgrounds/" + req.params.id);
+           } else {
+            if(req.user._id.equals(campground.author.id)){
+                res.render("campgrounds/edit", {campground: campground});
+            } else {
+                res.send("Only owner can edit this!!!")
+            }
+            
+           }
+        });
+    }  
+     else {
+        res.send("You have to login first!");
+    }
+   
     });
 
-});
 
 //UPDATE CAMPGROUND
 router.put("/:id", function(req, res){
