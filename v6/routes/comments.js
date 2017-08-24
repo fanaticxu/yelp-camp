@@ -20,7 +20,7 @@ router.get("/new", isLoggedIn, function(req, res){
 //connect new comment to campground
 //redirect campground show page
 
-//comments create
+//comments create /campgrounds/:id/comments
 router.post("/", isLoggedIn, function(req, res){
     Campground.findById(req.params.id, function(err, campground){
         if(err) {
@@ -32,6 +32,11 @@ router.post("/", isLoggedIn, function(req, res){
                     console.log(err);
                 }
                 else {
+                    //add a username and id to comment
+                    //req.user came from passport
+                    comment.author.id = req.user._id;
+                    comment.author.username = req.user.username;
+                    comment.save();
                     campground.comments.push(comment);
                     campground.save();
                     res.redirect("/campgrounds/" + campground._id);
