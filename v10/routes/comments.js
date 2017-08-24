@@ -46,6 +46,19 @@ router.post("/", isLoggedIn, function(req, res){
     });
 });
 
+//edit comments
+router.get("/edit", isLoggedIn, function(req, res){
+    Comment.findById(comment.author.id, function(err, comment){
+        if(err){
+            res.redirect("back");
+        } else {
+            res.render("comments/edit");
+        }
+    });
+});
+
+//delete comments
+
 // My solution
 // router.post("/index/:id/comments", function(req, res){
 //     Campground.findById(req.params.id).populate("comments").exec(function(err, campground){
