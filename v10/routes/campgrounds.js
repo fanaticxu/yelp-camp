@@ -20,7 +20,7 @@ router.post("/", isLoggedIn, function(req, res){
     //get data from form and add to campgrounds arry
     var name = req.body.name;
     var image = req.body.image;
-    var desc = req.body.description
+    var desc = req.body.description;
     var author = {
         id: req.user._id,
         username: req.user.username
