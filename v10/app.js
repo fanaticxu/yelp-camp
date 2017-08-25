@@ -41,6 +41,7 @@ passport.deserializeUser(User.deserializeUser());
 //when will call this function ,example
 app.use(function(req, res, next){
    res.locals.currentUser = req.user;
+   // console.log("appjs 44:" + res.locals.currentUser);
    next();
 });
 
