@@ -47,17 +47,38 @@ router.post("/", isLoggedIn, function(req, res){
 });
 
 //edit comments
-router.get("/edit", isLoggedIn, function(req, res){
-    Comment.findById(comment.author.id, function(err, comment){
+router.get("/:comment_id/edit", function(req, res){
+    Comment.findById(req.params.comment_id, function(err, foundComment){
         if(err){
             res.redirect("back");
         } else {
-            res.render("comments/edit");
+            res.render("comments/edit", {campground_id: req.params.id, comment: foundComment});
+        }
+    });
+   });
+
+//update comments
+router.put("/:comment_id", function(req, res){
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, comment){
+        if(err){
+            res.redirect("back");
+        } else {
+            res.redirect("/campgrounds/" + req.params.id);
         }
     });
 });
 
 //delete comments
+router.delete("/:comment_id", function(req, res){
+    Comment.findByIdAndRemove(req.params.comment_id, function(err){
+        if(err) {
+            res.redirect("back");
+        } else {
+            res.redirect("/campgrounds/" + req.params.id);
+        }
+    });
+});
+
 
 // My solution
 // router.post("/index/:id/comments", function(req, res){
