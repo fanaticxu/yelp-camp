@@ -8,6 +8,7 @@ var express = require("express"),
     Campground = require("./models/campground"),
     Comment = require("./models/comment"),
     User = require("./models/user"),
+    flash = require("connect-flash"),
     seedDB = require("./seeds");
 
 //requiring routes
@@ -22,7 +23,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
-console.log(__dirname);
+console.log("app.js line 26:" + __dirname);
+app.use(flash());
 // seedDB(); 
 
 //Passport configuration
@@ -42,6 +44,8 @@ passport.deserializeUser(User.deserializeUser());
 app.use(function(req, res, next){
    res.locals.currentUser = req.user;
    // console.log("appjs 44:" + res.locals.currentUser);
+   res.locals.error = req.flash("error");
+   res.locals.success = req.flash("success");
    next();
 });
 
