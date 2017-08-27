@@ -10,10 +10,12 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next) {
                 req.flash("error", "Campground not found");
                 res.redirect("back");
                } else {
-                        if(campground.author.id.equals(res.locals.currentUser)){
+                        if(campground.author.id.equals(res.locals.currentUser._id)){
                             next();
                         } 
                         else {
+                            console.log(campground.author.id);
+                            console.log(res.locals.currentUser);
                             req.flash("error", "You don't have permission to do that.");
                             res.redirect("back");
                         }                           
